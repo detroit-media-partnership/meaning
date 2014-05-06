@@ -17,10 +17,10 @@ class Submissions(Base):
 class Responses(Base):
 	__tablename__ = 'responses'
 	id = Column(Integer, primary_key=True)
-	submission_id = Column(Integer, ForeignKey('submissions.id')
+	submission_id = Column(Integer, ForeignKey('submissions.id'))
 	word = Column(String(50))
 	value = Column(Integer)
-	submission = relationship('Submissions', foreign_key'Responses.submission_id')
+	submission = relationship('Submissions', foreign_keys='Responses.submission_id')
 
 	def __init__(self, submission_id=None, word=None, value=None):
 		self.submission_id = submission_id

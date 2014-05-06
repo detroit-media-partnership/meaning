@@ -1,7 +1,8 @@
 import os
-from flask import Flask
-from flask import render_template
+from sqlalchemy import func
+from flask import Flask, render_template, request
 from database import db_session
+from models import Submissions, Responses
 from forms import MeaningForm
 
 app = Flask(__name__)
@@ -27,10 +28,31 @@ def submit():
 def complete():
 	form = MeaningForm()
 	if not form.validate_on_submit():
-		pass
+		return render_template('survey.html', form=form)
+	
+	submission = Submissions(ip=request.remote_addr)
+	db_session.add(submission)
+	db_session.commit()
+	
+	for field in form:
+		if field.name == "csrf_token":
+			continue
+		response = Responses(
+			submission_id=submission.id,
+			word=field.label.text,
+			value=field.data
+		)
+		db_session.add(response)
+		db_session.commit()
+	
+	return render_template('survey.html', success=True)		
 
 @app.route('/results', methods=['GET', 'POST'])
 def results():
+	from time import strftime
+	responses = Responses.query.filter(Responses.submission.has(Submissions.created==strftime("%Y-%m-%d"))).all()
+	print responses	
+
 	return render_template('results.html')
 
 if __name__ == '__main__':

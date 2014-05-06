@@ -5,8 +5,13 @@
 <div class="row">
 	<div class="col-md-12">
 		
+		For each of the words or phrases below, what is the 
+		percentage of time that each one conveys?  Assign each word 
+		or phrase a number from 0 to 100 based on your definition.
+		<hr />
+	
 		{% if success %}
-		<div class="alert alert-sucess">
+		<div class="alert alert-success">
 			<strong>Success!</strong> Survey submitted 
 			<a href="/result" class="alert-link">View Results</a>
 		</div>
@@ -25,78 +30,16 @@
 
 		<form class="form-horizontal" role="form" method="POST" action="/complete">
 			{{ form.csrf_token }}
+			{% for field in form %}
+			{% if field.name != "csrf_token" %}
 			<div class="form-group">
-				<label for="often" class="col-sm-2 control-label">Often</label>
-				<div class="col-sm-10">
-					{{ form.often(class="form-control") }}
+				<label for="{{ field.name }}" class="col-sm-2 control-label">{{ field.label.text }}</label>
+				<div class="col-sm-2">
+					{{ field(class="form-control") }}
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="always" class="col-sm-2 control-label">Always</label>
-				<div class="col-sm-10">
-					{{ form.always(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="sometimes" class="col-sm-2 control-label">Sometimes</label>
-				<div class="col-sm-10">
-					{{ form.sometimes(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="never" class="col-sm-2 control-label">Never</label>
-				<div class="col-sm-10">
-					{{ form.never(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="usually" class="col-sm-2 control-label">Usually</label>
-				<div class="col-sm-10">
-					{{ form.usually(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="most_of_time" class="col-sm-2 control-label">Most of the time</label>
-				<div class="col-sm-10">
-					{{ form.most_of_time(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="occasionally" class="col-sm-2 control-label">Occasionally</label>
-				<div class="col-sm-10">
-					{{ form.occasionally(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="seldom" class="col-sm-2 control-label">Seldom</label>
-				<div class="col-sm-10">
-					{{ form.seldom(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="almost_always" class="col-sm-2 control-label">Almost Always</label>
-				<div class="col-sm-10">
-					{{ form.almost_always(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="rarely" class="col-sm-2 control-label">Rarely</label>
-				<div class="col-sm-10">
-					{{ form.rarely(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="frequently" class="col-sm-2 control-label">Frequently</label>
-				<div class="col-sm-10">
-					{{ form.frequently(class="form-control") }}
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="quite_often" class="col-sm-2 control-label">Quite Often</label>
-				<div class="col-sm-10">
-					{{ form.quite_often(class="form-control") }}
-				</div>
-			</div>
+			{% endif  %}
+			{% endfor %}
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-success">Submit</button>

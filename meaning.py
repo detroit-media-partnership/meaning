@@ -39,7 +39,7 @@ def complete():
 			continue
 		response = Responses(
 			submission_id=submission.id,
-			word=field.label.text,
+			phrase=field.label.text,
 			value=field.data
 		)
 		db_session.add(response)
@@ -47,12 +47,24 @@ def complete():
 	
 	return render_template('survey.html', success=True)		
 
-@app.route('/results', methods=['GET', 'POST'])
+@app.route('/results')
 def results():
 	from time import strftime
 	responses = Responses.query.filter(Responses.submission.has(Submissions.created==strftime("%Y-%m-%d"))).all()
-	print responses	
-
+	
+	aggregate_phrases = []
+	for res in responses:
+		if len(aggregate_phrases) == 0:
+			aggregate_phrases.append({ 
+				"phrase": res.phrase, 
+				"values": [res.value] 
+			})
+			continue
+		for record in aggregate_phrases:
+			if res.phrase == record.phrase:
+				record['values'].append(res.value)
+				break		
+	
 	return render_template('results.html')
 
 if __name__ == '__main__':

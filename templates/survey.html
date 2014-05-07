@@ -1,5 +1,6 @@
 {% extends 'template.html' %}
 
+{% block js %}<script src="{{ url_for('static', filename='js/survey.js') }}"></script> {% endblock %}
 {% block title %}Survey{% endblock %}
 {% block content %}
 <div class="row">
@@ -39,7 +40,7 @@
 			{% if field.name != "csrf_token" %}
 			<div class="form-group">
 				<label for="{{ field.name }}" class="col-sm-2 control-label">{{ field.label.text }}</label>
-				<div class="col-sm-2">
+				<div class="col-sm-10">
 					{{ field(class="form-control") }}
 				</div>
 			</div>

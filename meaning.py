@@ -1,5 +1,5 @@
+from __future__ import division
 import os
-from sqlalchemy import func
 from flask import Flask, render_template, request
 from database import db_session
 from models import Submissions, Responses
@@ -47,25 +47,36 @@ def complete():
 	
 	return render_template('survey.html', success=True)		
 
-@app.route('/results')
-def results():
+@app.route('/results', defaults={"date": None})
+@app.route('/results/<date>')
+def results(date):
 	from time import strftime
-	responses = Responses.query.filter(Responses.submission.has(Submissions.created==strftime("%Y-%m-%d"))).all()
+	if date == "overall":
+		responses = Responses.query.all()
+	else:
+		responses = Responses.query.filter(Responses.submission.has(Submissions.created==strftime("%Y-%m-%d"))).all()
 	
 	aggregate_phrases = []
 	for res in responses:
-		if len(aggregate_phrases) == 0:
-			aggregate_phrases.append({ 
-				"phrase": res.phrase, 
-				"values": [res.value] 
-			})
-			continue
-		for record in aggregate_phrases:
-			if res.phrase == record.phrase:
-				record['values'].append(res.value)
+		found = False
+		for phrase in aggregate_phrases:
+			if res.phrase == phrase['phrase']:
+				found = True
+				phrase['values'].append(res.value)
 				break		
+		if not found:
+			aggregate_phrases.append({
+				"phrase": res.phrase,
+				"values": [res.value]
+			})
+	# get min, max, and average of all values within a phrase
+	for phrase in aggregate_phrases:
+		phrase['min'] = min(phrase['values'])
+		phrase['max'] = max(phrase['values'])
+		phrase['avg'] = sum(phrase['values']) / len(phrase['values'])
+		phrase['count'] = len(phrase['values'])
 	
-	return render_template('results.html')
+	return render_template('results.html', phrases=aggregate_phrases)
 
 if __name__ == '__main__':
 	app.run()

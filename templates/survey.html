@@ -5,6 +5,11 @@
 <div class="row">
 	<div class="col-md-12">
 		
+		<ol class="breadcrumb">
+			<li><a href="/">Intro</a>
+			<li class="active">Survey</li>
+		</ol>
+		
 		For each of the words or phrases below, what is the 
 		percentage of time that each one conveys?  Assign each word 
 		or phrase a number from 0 to 100 based on your definition.
@@ -13,7 +18,7 @@
 		{% if success %}
 		<div class="alert alert-success">
 			<strong>Success!</strong> Survey submitted 
-			<a href="/result" class="alert-link">View Results</a>
+			<a href="/results" class="alert-link">View Results</a>
 		</div>
 		{% endif %}
 	

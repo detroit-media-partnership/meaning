@@ -1,12 +1,13 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Date, func
 from sqlalchemy.orm import relationship
 from database import Base
+from time import strftime
 
 class Submissions(Base):
 	__tablename__ = 'submissions'
 	id = Column(Integer, primary_key=True)
 	ip = Column(String(15))
-	created = Column(Date, default=func.now())
+	created = Column(Date, default=strftime("%Y-%m-%d"))
 
 	def __init__(self, ip='0.0.0.0'):
 		self.ip = ip

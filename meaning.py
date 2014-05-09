@@ -8,6 +8,7 @@ from forms import MeaningForm
 app = Flask(__name__)
 app.debug = True
 app.secret_key ='\xa2\xf2\xa8\xdb/\xf3\xae\xdd\xf6\xe2u"Ph\x12:\xa8\xa2\xf8:\x8fTMr'
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 3600
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

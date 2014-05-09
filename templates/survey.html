@@ -1,11 +1,15 @@
 {% extends 'template.html' %}
 
 {% block css %}
-<link href="{{ url_for('static', filename='css/jquery.mobile.custom.theme.min.css') }}" type="text/css" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/jquery.mobile.structure-1.4.2.min.css') }}" type="text/css" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/jquery.mobile.theme-1.4.2.min.css') }}" type="text/css" rel="stylesheet">
+<style>
+	body { background-color: #fff;}
+</style>
 {% endblock %}
 
 {% block js %}
-<script src="{{ url_for('static', filename='js/jquery.mobile.custom.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.mobile-1.4.2.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/survey.js') }}"></script> 
 {% endblock %}
 {% block title %}Survey{% endblock %}
@@ -47,7 +51,7 @@
 			{% if field.name != "csrf_token" %}
 			<div class="form-group field-contain">
 				<label for="{{ field.name }}" class="col-sm-2">{{ field.label.text }}</label>
-				<div class="col-sm-4 inp-container">
+				<div class="col-sm-10 inp-container">
 					{{ field(class="form-control sliders", value=50, **{"type": "range", "min":"0", "max":"100"}) }}
 				</div>
 			</div>

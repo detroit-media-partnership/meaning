@@ -3,7 +3,6 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-		<link href="{{ url_for('static', filename='css/jquery.mobile.custom.structure.min.css') }}" rel="stylesheet">
 		{% block css %}{% endblock %}
 		<title>{% block title %}{% endblock %} - Meaning</title>
 	</head>
@@ -17,7 +16,6 @@
 		<br /><br />	
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<script src="{{ url_for('static', filename='js/jquery.mobile.custom.min.js') }}"></script>
 		{% block js %}{% endblock %}
 	</body>
 </html>

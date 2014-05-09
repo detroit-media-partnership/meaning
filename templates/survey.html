@@ -1,6 +1,13 @@
 {% extends 'template.html' %}
 
-{% block js %}<script src="{{ url_for('static', filename='js/survey.js') }}"></script> {% endblock %}
+{% block css %}
+<link href="{{ url_for('static', filename='css/slider.css') }}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/bootstrap-slider.js') }}"></script>
+<script src="{{ url_for('static', filename='js/survey.js') }}"></script> 
+{% endblock %}
 {% block title %}Survey{% endblock %}
 {% block content %}
 <div class="row">
@@ -39,12 +46,14 @@
 			{% for field in form %}
 			{% if field.name != "csrf_token" %}
 			<div class="form-group">
-				<label for="{{ field.name }}" class="col-sm-2 control-label">{{ field.label.text }}</label>
-				<div class="col-sm-10">
-					{{ field(class="form-control") }}
+				<label for="{{ field.name }}" class="col-sm-2">{{ field.label.text }}</label>
+				<div class="col-sm-4 inp-container">
+					{{ field(class="form-control sliders", value=50) }}
 				</div>
+				<div class="col-sm-5 slider-value"></div>
 			</div>
-			{% endif  %}
+			{% endif %}
+			<br />
 			{% endfor %}
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">

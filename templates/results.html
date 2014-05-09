@@ -12,6 +12,7 @@
 		<thead>
 			<tr>
 				<th>Phrase</th>
+				<th>Count</th>
 				<th>Min</th>
 				<th>Max</th>
 				<th>Avg</th>
@@ -21,6 +22,7 @@
 			{% for phrase in phrases %}
 			<tr>
 				<td>{{ phrase.phrase }}</td>
+				<td>{{ phrase.count }}</td>
 				<td>{{ phrase.min }}</td>
 				<td>{{ phrase.max }}</td>
 				<td>{{ phrase.avg }}</td>

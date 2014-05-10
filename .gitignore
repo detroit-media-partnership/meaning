@@ -1,2 +1,3 @@
 *.pyc
 db_uri.py
+.nfs*

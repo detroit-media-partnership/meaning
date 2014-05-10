@@ -16,6 +16,7 @@ def init_db():
 	import models
 	Base.metadata.create_all(bind=engine)
 
+"""
 @event.listens_for(Pool, "checkout")
 def ping_connection(dbapi_connection, connection_record, connection_proxy):
 	cursor = dbapi_connection.cursor()
@@ -24,3 +25,4 @@ def ping_connection(dbapi_connection, connection_record, connection_proxy):
 	except:
 		raise exc.DisconnectionError()
 	cursor.close()
+"""

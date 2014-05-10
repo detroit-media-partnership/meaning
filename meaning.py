@@ -73,7 +73,7 @@ def results(date):
 	for phrase in aggregate_phrases:
 		phrase['min'] = min(phrase['values'])
 		phrase['max'] = max(phrase['values'])
-		phrase['avg'] = format(sum(phrase['values']) / len(phrase['values']), '.2f')
+		phrase['avg'] = format(sum(phrase['values']) / len(phrase['values']), '.3f')
 		phrase['count'] = len(phrase['values'])
 	
 	return render_template('results.html', phrases=aggregate_phrases)

@@ -1,5 +1,4 @@
-from sqlalchemy import create_engine, exc, event
-from sqlalchemy.pool import Pool
+from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import db_uri
@@ -16,13 +15,3 @@ def init_db():
 	import models
 	Base.metadata.create_all(bind=engine)
 
-"""
-@event.listens_for(Pool, "checkout")
-def ping_connection(dbapi_connection, connection_record, connection_proxy):
-	cursor = dbapi_connection.cursor()
-	try:
-		cursor.execute("SELECT 1")
-	except:
-		raise exc.DisconnectionError()
-	cursor.close()
-"""

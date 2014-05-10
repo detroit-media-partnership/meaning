@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from database import db_session
 from models import Submissions, Responses
 from forms import MeaningForm
+from sqlalchemy import func
 
 app = Flask(__name__)
 app.debug = True
@@ -54,7 +55,7 @@ def results(date):
 	if date == "overall":
 		responses = Responses.query.all()
 	else:
-		responses = Responses.query.filter(Responses.submission.has(Submissions.created==strftime("%Y-%m-%d"))).all()
+		responses = Responses.query.filter(Responses.submission.has(func.date(Submissions.created)==func.date(strftime("%Y-%m-%d")))).all()
 	
 	aggregate_phrases = []
 	for res in responses:

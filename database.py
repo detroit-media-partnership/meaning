@@ -1,12 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-import db_uri
+try:
+	from settings import DB_URI
+except:
+	raise Exception("Database requires DB_URI var inside settings.py file")
 
-engine = create_engine(db_uri.DB_URI, pool_recycle=100, convert_unicode=True)
-db_session = scoped_session(sessionmaker(autocommit=False,
-					autoflush=True,
-					bind=engine))
+engine = create_engine(DB_URI, pool_recycle=100, convert_unicode=True)
+sesh = sessionmaker(autocommit=False, autoflush=True, bind=engine)
+db_session = scoped_session(sesh)
 
 Base = declarative_base()
 Base.query = db_session.query_property()

@@ -15,6 +15,10 @@ You can view the results after everyone has entered numbers for each word. Meani
 
 You can use the results to begin a discussion about how even though we use these words daily, the same word might have very different meaning to someone else.
 
+MySQL Dependencies:
+
+    $ sudo apt-get install mysql-server libmysqlclient-dev
+
 db\_uri.py contains the database connection string that hooks into SQLAlchemy
 e.g. for mysql:
     

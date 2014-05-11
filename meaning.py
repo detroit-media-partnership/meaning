@@ -6,10 +6,12 @@ from database import db_session
 from models import Submissions, Responses
 from forms import MeaningForm
 
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 # import settings from settings file
-settings_file = 'settings.py'
+settings_file = os.path.join(BASE_DIR, 'settings.py')
 if os.path.isfile(settings_file):
 	app.config.from_pyfile(settings_file)
 
@@ -89,7 +91,7 @@ def results(date):
 	for phrase_item in agg_phrases:
 		phrase_item['min'] = min(phrase_item['values'])
 		phrase_item['max'] = max(phrase_item['values'])
-		phrase_item['avg'] = format(sum(phrase_item['values']) / len(phrase_item['values']), '.3f')
+		phrase_item['avg'] = format(sum(phrase_item['values']) / len(phrase_item['values']), '.2f')
 		phrase_item['count'] = len(phrase_item['values'])
 	
 	return render_template('results.html', phrases=agg_phrases)

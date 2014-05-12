@@ -1,0 +1,40 @@
+{% extends 'template.html' %}
+
+{% block title %}Session Management{% endblock %}
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="/">Intro</a></li>
+	<li class="active">Sessions</li>
+</ol>
+
+<a href="/sessions/new" class="btn btn-success" style="margin-bottom: 8px;">Create Session</a>
+
+{% if sessions %}
+<div class="table-responsive">
+	<table class="table table-condensed table-striped table-hover">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>Name</th>
+				<th>Created</th>
+				<th>Count</th>
+				<th>Manage</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for sesh in sessions %}
+			<tr {% if loop.index == 1 %}class="success"{% endif %}>
+				<td>{{ sesh.id }}</td>
+				<td>{{ sesh.name }}</td>
+				<td>{{ sesh.created }}</td>
+				<td>{{ sesh.count }}</td>
+				<td>Edit</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% else %}
+<div class="alert alert-info">Oops, there are currently no sessions in this database.</div>
+{% endif %}
+{% endblock %}

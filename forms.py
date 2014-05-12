@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import IntegerField
+from wtforms import IntegerField, TextField
 from wtforms.validators import Required, NumberRange
 
 class MeaningForm(Form):
@@ -15,3 +15,6 @@ class MeaningForm(Form):
 	rarely = IntegerField('Rarely', default=50, validators=[NumberRange(min=0, max=100)])
 	frequently = IntegerField('Frequently', default=50, validators=[NumberRange(min=0, max=100)])
 	quite_often = IntegerField('Quite Often', default=50, validators=[NumberRange(min=0, max=100)])
+
+class SessionForm(Form):
+	name = TextField('Session Name', default=None)

@@ -1,0 +1,48 @@
+{% extends 'template.html' %}
+{% block title %}Create Session{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span-md-12">
+		<ol class="breadcrumb">
+                        <li><a href="/">Intro</a>
+			<li><a href="/sessions">Session</a></li>
+                        <li class="active">New</li>
+                </ol>
+                
+                Create a new session, the name is optional.
+		The current results always look for the newest session
+		created within today's date.
+                <hr />
+        
+                {% if success %}
+                <div class="alert alert-success">
+                        <strong>Success!</strong> Session created.
+                </div>
+                {% else %}
+                <form class="form-horizontal" role="form" method="POST" action="/sessions/new/complete">
+                        {{ form.csrf_token }}
+                        {% for field in form %}
+                                {% if field.name != "csrf_token" %}
+                                <div class="form-group field-contain {% if field.errors %}has-error{% endif %}">
+                                        <label for="{{ field.name }}" class="col-sm-2 control-label">{{ field.label.text }}</label>
+                                        <div class="col-sm-10">
+                                                {{ field(class="form-control") }}
+                                                {% if field.errors %}
+                                                <span class="help-block">{% for error in field.errors %}{{ error }}.  {% endfor %}</span>
+                                                {% endif %}
+                                        </div>
+                                </div>
+                                {% endif %}
+                        <br />
+                        {% endfor %}
+                        <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-success">Create Session!</button>
+                                </div>
+                        </div>
+                </form>
+                {% endif %}
+		
+	</div>
+</div>
+{% endblock %}

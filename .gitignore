@@ -2,3 +2,4 @@
 db_uri.py
 settings.py
 .nfs*
+*.orig

@@ -3,12 +3,30 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
 		{% block css %}{% endblock %}
 		<title>{% block title %}{% endblock %} - Meaning</title>
+		<style type="text/css">
+	
+ 			body {
+				background-color: #3D97DF;
+				color: #fff;
+				font-family: 'Oswald', sans-serif;
+				}
+ 	
+ 			.jumbotron {
+				background-color: #7DCBBA;
+				}
+	
+ 			a {
+				   color: #fff; 
+				}
+	
+		</style>
 	</head>
 	<body>	
 		<div class="container">
-			<h3>Innovation and Product Development</h3> 
+			<h3>Meaning — A Semantics Exercise</h3> 
 			{% block content %}{% endblock %}
 			<hr />
 			&copy; Copyright 2014 by <a href="http://detroitmedia.com">Detroit Media Partnership</a>

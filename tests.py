@@ -5,7 +5,7 @@ import unittest
 import tempfile
 
 class MeaningTestCase(unittest.TestCase):
-	
+
 	def setUp(self):
 		self.db_fd, meaning.app.config['DATABASE'] = tempfile.mkstemp()
 		meaning.app.config['TESTING'] = True

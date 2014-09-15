@@ -6,7 +6,7 @@ try:
 except:
 	raise Exception("Database requires DB_URI var inside settings.py file")
 
-engine = create_engine(DB_URI, pool_recycle=100, convert_unicode=True)
+engine = create_engine(DB_URI, convert_unicode=True)
 sesh = sessionmaker(autocommit=False, autoflush=True, bind=engine)
 db_session = scoped_session(sesh)
 

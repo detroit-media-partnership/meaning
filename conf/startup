@@ -7,7 +7,7 @@ USER=ebower
 GROUP=web
 NUM_WORKERS=3
 WSGI_MODULE=meaning
-VIRTENV=/home/ebower/.virtualenvs/meaning
+VIRTENV=/srv/virtualenvs/meaning
 
 echo "Starting $NAME"
 
